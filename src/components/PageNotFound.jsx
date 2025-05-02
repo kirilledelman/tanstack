@@ -1,6 +1,7 @@
-import { ExclamationTriangleIcon as OutlineIcon } from '@heroicons/react/24/outline';
-import { ExclamationTriangleIcon as SolidIcon } from '@heroicons/react/24/solid';
+import { ExclamationTriangleIcon as OutlineIcon } from '@heroicons/react/24/outline'
+import { ExclamationTriangleIcon as SolidIcon } from '@heroicons/react/24/solid'
 
+// 404 not found page, or notification-sized
 export default function PageNotFound({small=false, message="Page not found"}) {
 	// in-page 404
 	if (small) return (<div className="alert">

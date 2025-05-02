@@ -5,5 +5,5 @@ export const Route = createFileRoute('/throw-error')({
 })
 
 function RouteComponent() {
-	throw new Error('Simulated error thrown in component');
+	throw new Error("Simulated error thrown in component");
 }

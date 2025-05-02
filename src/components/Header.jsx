@@ -1,12 +1,14 @@
-import { useContext } from "react";
-import { Link } from "@tanstack/react-router";
-import { Switch, Field, Label } from '@headlessui/react'
-import { CircleStackIcon } from '@heroicons/react/24/solid'
-import { AppContext } from "./AppContextProvider.jsx";
+import { useContext } from "react"
+import { Link } from "@tanstack/react-router"
+import { Switch, Field, Label } from "@headlessui/react"
+import { CircleStackIcon } from "@heroicons/react/24/solid"
+import { AppContext } from "./AppContextProvider.jsx"
 
+// App navigation header with theme changer
 export default function Header() {
 	const context = useContext(AppContext);
 
+	// output navigation
 	return (<nav>
 		<Link to="/" className="no-line"><CircleStackIcon className="w-8 h-8 min-w-8" /></Link>
 		<Link to="/">Home</Link>
@@ -18,9 +20,7 @@ export default function Header() {
 
 		<Field className="switch-field">
 			<Label>{context.theme}</Label>
-			<Switch className="switch group"
-				onChange={context.toggleTheme}
-				checked={context.theme === 'light'}>
+			<Switch className="switch group" onChange={context.toggleTheme} checked={context.theme === 'light'}>
 				<span/>
 			</Switch>
 		</Field>

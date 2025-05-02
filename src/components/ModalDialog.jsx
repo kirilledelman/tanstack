@@ -1,9 +1,11 @@
-import { useEffect, useRef } from "react";
-import { XMarkIcon } from "@heroicons/react/24/solid/index.js";
+import { useEffect, useRef } from "react"
+import { XMarkIcon } from "@heroicons/react/24/solid/index.js"
 
-export default function ModalDialog({ open, header="Modal", closeFn, children }) {
+// basic modal using <dialog> HTML element
+export default function ModalDialog({ open, header, closeFn, children }) {
 	const dialogRef = useRef(null);
 
+	// watches .open propert and shows/hides html dialog
 	useEffect(() => {
 		if ( dialogRef.current && open !== dialogRef.current.open ) {
 			if ( open ) {
@@ -14,6 +16,7 @@ export default function ModalDialog({ open, header="Modal", closeFn, children })
 		}
 	}, [open, closeFn]);
 
+	// dialog itself
 	return (
 	<dialog ref={dialogRef} onClose={closeFn}>
 		<div className="frame">

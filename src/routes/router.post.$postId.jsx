@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { fetchPostLoader } from "../util/common.js";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import PageNotFound from "../components/PageNotFound.jsx";
-import PostItem from "../components/PostItem.jsx";
+import { createFileRoute } from "@tanstack/react-router"
+import { fetchPostLoader } from "../util/common.js"
+import LoadingSpinner from "../components/LoadingSpinner.jsx"
+import PageNotFound from "../components/PageNotFound.jsx"
+import PostItem from "../components/PostItem.jsx"
 
 export const Route = createFileRoute('/router/post/$postId')({
   component: RouteComponent,
@@ -13,9 +13,10 @@ export const Route = createFileRoute('/router/post/$postId')({
 })
 
 function RouteComponent() {
+	// get loader data
 	const post = Route.useLoaderData();
 
-	// bad id - show error
+	// no post? show error
 	if (!post) return <PageNotFound small message="Post with this ID was not found" />
 
 	// show post

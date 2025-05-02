@@ -1,9 +1,10 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { backendUrl } from "../util/common.js";
-import LoadingSpinner from "./LoadingSpinner.jsx";
-import PageError from "./PageError.jsx";
-import { useVirtualizer } from '@tanstack/react-virtual';
-import { useEffect, useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query"
+import { useVirtualizer } from "@tanstack/react-virtual"
+import { useEffect, useRef } from "react"
+import LoadingSpinner from "./LoadingSpinner.jsx"
+import PageError from "./PageError.jsx"
+import { backendUrl } from "../util/common.js"
+
 
 // Query function fetching page based on queryKey
 async function fetchPage({queryKey, pageParam, signal}){
@@ -37,6 +38,8 @@ export function InfiniteLoad() {
 		getNextPageParam: (lastData) => lastData.nextPage,
 		initialPageParam: 0,
 	});
+
+	// flatten rows from data.pages array
 	const allRows = data ? data.pages.flatMap((d) => d.data) : []
 
 	// when user scrolls near the bottom, load more pages

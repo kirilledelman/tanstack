@@ -1,4 +1,4 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from "@tanstack/react-router"
 
 export const Route = createLazyFileRoute('/router/lazy-load')({
   component: RouteComponent,

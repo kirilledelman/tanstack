@@ -1,24 +1,25 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Field, Label, Switch } from "@headlessui/react";
-import { Fragment, Profiler, useState } from "react";
-import { InfiniteLoad, InfiniteLoadVirtual } from "../components/InfiniteLoad.jsx";
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
-import { ClockIcon } from "@heroicons/react/24/outline/index.js";
+import { Profiler, useState } from "react"
+import { createFileRoute } from "@tanstack/react-router"
+import { Field, Label, Switch } from "@headlessui/react"
+import { ClockIcon } from "@heroicons/react/24/outline/index.js"
+import { InfiniteLoad, InfiniteLoadVirtual } from "../components/InfiniteLoad.jsx"
+
 export const Route = createFileRoute('/virtual')({
 	component: RouteComponent,
 })
-
-// https://tanstack.com/virtual/latest/docs/framework/react/examples/infinite-scroll
 
 function RouteComponent() {
 	const [useVirtual, setUseVirtual] = useState(true);
 	const [updateDuration, setUpdateDuration] = useState(0);
 
+	// update time display
 	function profilerCallback(id, phase, actualDuration) {
 		if ( phase === 'update') setUpdateDuration(actualDuration);
 	}
 
-	return (<section>
+	// display page
+	return (
+	<section>
 		<h1>TanStack Virtual</h1>
 		<article>
 			<p><strong>TanStack Virtual</strong> is a utility for virtualizing long scrollable lists.
@@ -42,10 +43,8 @@ function RouteComponent() {
 				Infinite Loader
 				<Field className="switch-field">
 					<Label>Use virtual</Label>
-					<Switch className="switch group"
-					        onChange={setUseVirtual}
-					        checked={useVirtual}>
-						<span/>
+					<Switch className="switch group" onChange={setUseVirtual} checked={useVirtual}>
+						<span />
 					</Switch>
 				</Field>
 			</h2>

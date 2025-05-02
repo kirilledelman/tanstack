@@ -1,9 +1,11 @@
-import { createContext, useEffect, useState } from "react";
-import ModalDialog from "./ModalDialog.jsx";
+import { createContext, useEffect, useState } from "react"
+import ModalDialog from "./ModalDialog.jsx"
 
+// context provides theme switch and a modal dialog presenter
 export const AppContext = createContext({
-	theme: 'dark', toggleTheme:()=>{},
-	showModal:()=>{},
+	theme: 'dark',
+	toggleTheme: ()=>{},
+	showModal: ()=>{},
 });
 
 export default function AppContextProvider({ children }){
@@ -26,7 +28,7 @@ export default function AppContextProvider({ children }){
 		dbc.add(theme);
 	},[theme]);
 
-	// modal
+	// show/hide modal function
 	function showModal(opts) {
 		if ( !opts || opts === false ) {
 			setModalOpen(false);
@@ -37,6 +39,7 @@ export default function AppContextProvider({ children }){
 		}
 	}
 
+	// wrap in context provider and add ModalDialog to the tree
 	return (
 		<AppContext.Provider value={{ theme, toggleTheme, showModal }}>
 			{children}

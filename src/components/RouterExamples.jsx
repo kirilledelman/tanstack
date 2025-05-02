@@ -1,20 +1,13 @@
-import { Link, useLocation } from '@tanstack/react-router'
-import { ArrowRightIcon } from "@heroicons/react/24/solid/index.js";
+import { Link, useLocation } from "@tanstack/react-router"
+import { ArrowRightIcon } from "@heroicons/react/24/solid/index.js"
 
-/*
-examples of routes:
-https://tanstack.com/router/latest
-
-explanations:
-https://tanstack.com/router/latest/docs/framework/react/routing/routing-concepts
-
- */
-
+// Route examples for routes page
 export default function RouterExamples() {
 	const loc = useLocation();
-	function isMatch(r) {
-		return (loc.pathname + loc.searchStr) === r.route;
-	}
+
+	// used to display an arrow next to current route
+	function isMatch(r) { return (loc.pathname + loc.searchStr) === r.route }
+
 	const routes = [
 		{ route: '/router', title: 'Root', filename: 'router.jsx' },
 		{ route: '/router/sub-route', title: 'Sub page', filename: 'router.sub-route.jsx' },
@@ -25,7 +18,10 @@ export default function RouterExamples() {
 		{ route: '/router/wildcard/any/thing', title: 'Catch all', filename: 'router.wildcard.$.jsx' },
 		{ route: '/throw-error', title: 'Throw error', filename: 'throw-error.jsx' },
 	];
-	return <ul className="-ml-2 sm:-ml-5">
+
+	// output
+	return (
+		<ul className="-ml-2 sm:-ml-5">
 		{routes.map(r => (
 			<li key={r.route} className="flex flex-row items-start sm:items-center gap-2 mt-2">
 				{ isMatch(r) ? <ArrowRightIcon className="max-w-4 mt-1 sm:mt-0"/> : <span className="min-w-4"/> }
@@ -36,5 +32,5 @@ export default function RouterExamples() {
 				</div>
 			</li>
 		))}
-	</ul>
+	</ul>)
 }

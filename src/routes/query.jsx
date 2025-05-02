@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query";
-import PageError from "../components/PageError.jsx";
-import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import PostItem from "../components/PostItem.jsx";
-import { InformationCircleIcon } from "@heroicons/react/24/solid/index.js";
-import { useContext, useState } from "react";
-import { AppContext } from "../components/AppContextProvider.jsx";
-import EditPost from "../components/EditPost.jsx";
-import { backendUrl, queryClient } from "../util/common.js";
+import { useContext, useState } from "react"
+import { createFileRoute } from "@tanstack/react-router"
+import { useQuery, keepPreviousData, useMutation } from "@tanstack/react-query"
+import PageError from "../components/PageError.jsx"
+import LoadingSpinner from "../components/LoadingSpinner.jsx"
+import PostItem from "../components/PostItem.jsx"
+import { InformationCircleIcon } from "@heroicons/react/24/solid/index.js"
+import { AppContext } from "../components/AppContextProvider.jsx"
+import EditPost from "../components/EditPost.jsx"
+import { backendUrl, queryClient } from "../util/common.js"
 
 export const Route = createFileRoute('/query')({
 	component: RouteComponent,
@@ -15,20 +15,35 @@ export const Route = createFileRoute('/query')({
 
 function RouteComponent() {
 	const [page, setPage] = useState(0);
-	const { isError, error, data, isPending } =
-		useQuery({ queryKey:['posts', page ], placeholderData: keepPreviousData });
 	const context = useContext(AppContext);
-	const { mutate: savePost, isPending: isMutationPending, variables: mutationData } = useMutation({
-		// post
+
+	// this query fetches paginated list of posts
+	const {
+		isError,
+		error,
+		data,
+		isPending
+	} = useQuery({ queryKey:['posts', page ], placeholderData: keepPreviousData });
+
+	// mutator hook
+	const {
+		mutate: savePost,
+		isPending: isMutationPending,
+		variables: mutationData
+	} = useMutation({
+
+		// post function
 		mutationFn: async (post) => fetch(`${backendUrl}/post`, {
 				method: "PATCH", headers: { "Content-type": "application/json"},
 				body: JSON.stringify(post)
 			}),
 
-		// When mutate is called:
+		// called right before mutationFn
 		onMutate: async (_post) => {
+			// cancel any pending queries
 			await queryClient.cancelQueries({ queryKey: ['posts'] })
-			// snapshot
+
+			// create snapshot for pre-mutation data
 			const prevData = queryClient.getQueryData(['posts', page]);
 
 			// Optimistically update to the new value
@@ -50,12 +65,15 @@ function RouteComponent() {
 			console.error(err);
 			queryClient.setQueryData(['posts', page], context.prevData);
 		},
+
 		// Always refetch after error or success:
 		onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts', page] }),
 	});
 
+	// page prev/next buttons handler
 	function goPage(dir){ setPage(page + dir); }
 
+	// edit button callback
 	function editPost(post) {
 		context.showModal({
 			title: "Edit Post",
@@ -63,6 +81,7 @@ function RouteComponent() {
 		})
 	}
 
+	// display page
 	return (<section>
 		<h1>TanStack Query</h1>
 		<article>
@@ -90,9 +109,10 @@ function RouteComponent() {
 			{ isError && <PageError error={error} small/> }
 			{ data &&
 			<div className="outlet gap-2">
-				{ data.posts.map((item)=><PostItem post={item} key={item._id} onEdit={editPost} isMutating={isMutationPending && mutationData?._id === item._id} />)}
+				{ data.posts.map((item)=>(
+					<PostItem post={item} key={item._id} onEdit={editPost} isMutating={isMutationPending && mutationData?._id === item._id} />
+				))}
 			</div>}
-
 		</article>
 	</section>)
 }

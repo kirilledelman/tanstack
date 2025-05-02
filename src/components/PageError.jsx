@@ -1,6 +1,7 @@
-import { ExclamationCircleIcon as SolidIcon } from '@heroicons/react/24/solid';
-import { ExclamationCircleIcon as OutlineIcon } from '@heroicons/react/24/outline';
+import { ExclamationCircleIcon as SolidIcon } from '@heroicons/react/24/solid'
+import { ExclamationCircleIcon as OutlineIcon } from '@heroicons/react/24/outline'
 
+// error page or in-page notification
 export default function PageError({error, small=false}) {
 	// in-page error
 	if (small) return (<div className="alert">

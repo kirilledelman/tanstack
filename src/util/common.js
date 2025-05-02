@@ -1,7 +1,6 @@
-
-// common backend URL based on window.location
 import { QueryClient } from "@tanstack/react-query";
 
+// common backend URL based on window.location
 export const backendUrl = `${window.location.protocol}//${window.location.hostname}:10001`;
 
 // query client used in this app
@@ -20,7 +19,7 @@ export async function fetchData({queryKey, signal}) {
 	return res.json();
 }
 
-// using TanStack Query inside loader
+// Router example using TanStack Query inside loader
 export async function fetchPostLoader({params}) {
 	return await queryClient.fetchQuery({
 		queryKey: ['post', params.postId ],
