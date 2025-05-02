@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import tanStackLogo from '/public/10stack.png';
 
 export const Route = createFileRoute('/')({
 	component: Index,
@@ -13,7 +14,7 @@ function Index() {
 					Query</strong>, <strong>TanStack Virtual</strong>, <strong>Headless UI</strong> component library,
 					and <strong>Tailwind CSS</strong>.</p>
 				<p>Use navigation on top of the page to see little demos of TanStack functionality in action.</p>
-				<img src="/public/10stack.png" alt="TanStack Logo"/>
+				<img src={tanStackLogo} alt="TanStack Logo"/>
 			</article>
 		</section>)
 }

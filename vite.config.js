@@ -3,12 +3,14 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
 
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-      TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
-      tailwindcss(),
-      react(),
-  ],
+	base: '',
+	plugins: [
+		TanStackRouterVite({target: 'react', autoCodeSplitting: true}),
+		tailwindcss(),
+		react(),
+	],
+	resolve: {
+		alias: { 'react-dom/client': 'react-dom/profiling' }
+	}
 })
