@@ -14,6 +14,9 @@ function Index() {
 					Query</strong>, <strong>TanStack Virtual</strong>, <strong>Headless UI</strong> component library,
 					and <strong>Tailwind CSS</strong>.</p>
 				<p>Use navigation on top of the page to see little demos of TanStack functionality in action.</p>
+				<p>Source for this project can be found
+					at <a href="https://github.com/kirilledelman/tanstack" target="_blank">https://github.com/kirilledelman/tanstack</a>
+				</p>
 				<img src={tanStackLogo} alt="TanStack Logo"/>
 			</article>
 		</section>)

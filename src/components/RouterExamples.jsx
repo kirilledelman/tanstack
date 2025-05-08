@@ -1,5 +1,6 @@
-import { Link, useLocation } from "@tanstack/react-router"
-import { ArrowRightIcon } from "@heroicons/react/24/solid/index.js"
+import { Link, useLocation, useRouterState } from "@tanstack/react-router"
+import { ArrowRightCircleIcon } from "@heroicons/react/24/solid/index.js"
+import { useEffect } from "react";
 
 // Route examples for routes page
 export default function RouterExamples() {
@@ -19,18 +20,30 @@ export default function RouterExamples() {
 		{ route: '/throw-error', title: 'Throw error', filename: 'throw-error.jsx' },
 	];
 
+	// scroll to bottom on load
+	const { status } = useRouterState();
+	useEffect(() => {
+		let timeout;
+		if ( status === 'idle') {
+			timeout = setTimeout(() => {
+				window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+			}, 250);
+		}
+		return () => clearTimeout(timeout);
+	},[status]);
+
 	// output
 	return (
 		<ul className="-ml-2 sm:-ml-5">
-		{routes.map(r => (
-			<li key={r.route} className="flex flex-row items-start sm:items-center gap-2 mt-2">
-				{ isMatch(r) ? <ArrowRightIcon className="max-w-4 mt-1 sm:mt-0"/> : <span className="min-w-4"/> }
-				<Link to={r.route} className="overflow-hidden overflow-ellipsis">{r.route}</Link>
-				<div className="flex flex-col flex-1 items-end sm:flex-row gap-2">
-					<span className="flex-1 text-sm text-nowrap">{r.title}</span>
-					<em className="text-gray-500 dark:text-gray-400 text-sm text-nowrap">{r.filename}</em>
-				</div>
+		{routes.map(r => {
+			const matched = isMatch(r);
+			return <li key={r.route} className="flex flex-row items-center gap-2 mt-2 w-full">
+				{ matched ? <ArrowRightCircleIcon className="min-w-4 w-4 mt-1 sm:mt-0"/> : <span className="min-w-4 w-4"/>}
+				<Link to={r.route} className="overflow-hidden overflow-ellipsis max-w-1/2">{r.route}</Link>
+				{ matched ?
+					<div className="flex-1 text-right font-bold">{ r.filename }</div> :
+					<div className="flex-1 text-right opacity-75">{ r.title }</div>}
 			</li>
-		))}
+		})}
 	</ul>)
 }

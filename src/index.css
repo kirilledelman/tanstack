@@ -2,13 +2,13 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 main {
-  @apply flex flex-col min-h-screen p-4 items-center;
+  @apply flex flex-col min-h-screen items-center pb-8;
   @apply bg-gray-100 text-gray-800;
   @apply dark:bg-gray-900 dark:text-gray-100;
 }
 
 nav {
-  @apply flex items-center w-full gap-4 mb-2;
+  @apply flex items-start sm:items-center gap-4 mb-2 sm:w-full mt-4 px-4;
 
   a {
     @apply text-black dark:text-white;
@@ -27,14 +27,16 @@ a {
 }
 
 section {
+  @apply max-w-sm sm:max-w-xl px-4;
+
   h1 {
-    @apply text-4xl my-8 font-extrabold;
+    @apply text-4xl my-4 sm:my-8 font-extrabold;
   }
   h2 {
     @apply text-2xl my-4 font-bold;
   }
   article {
-    @apply max-w-sm sm:max-w-xl rounded-lg py-4 px-4 sm:px-8;
+    @apply w-full rounded-lg py-4 px-4 sm:px-8;
     @apply bg-gray-300 dark:bg-gray-600;
 
     p + p {
@@ -44,7 +46,7 @@ section {
     .info-box {
       @apply flex gap-4 text-sm bg-gray-200 dark:bg-gray-700 rounded-sm p-2;
       svg {
-        @apply max-w-10 w-10 self-start;
+        @apply min-w-8 max-w-8 sm:min-w-10 sm:max-w-10 self-start;
       }
     }
   }
@@ -97,7 +99,7 @@ button {
 
 .switch-field {
   @apply flex gap-2;
-  label { @apply cursor-pointer text-base font-normal; }
+  label { @apply cursor-pointer text-base font-normal max-h-6; }
   button {
     @apply cursor-pointer inline-flex h-6 w-11 items-center rounded-full bg-gray-400 transition data-[checked]:bg-blue-600;
     span {

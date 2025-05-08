@@ -26,14 +26,15 @@ function RouteComponent() {
 				It reuses rows, columns, or cells to display any amount of data in a viewport.
 				This can have huge performance benefits with long lists.</p>
 
-			<div className="flex flex-row gap-2 mt-4 items-end">
-				<div>This example loads more rows as user scrolls to the bottom.
-				Without virtualization the number of DOM nodes representing rows will grow as will the time to render them.
-				With Virtual, the number of rows will stay the same, only their contents and position are affected.</div>
+			<p>This example loads more rows as user scrolls to the bottom.
+				Without virtualization the number of DOM nodes representing rows will grow as will the time to render them.</p>
 
-				<div className="p-4 rounded-md flex flex-col items-center bg-gray-200 dark:bg-gray-700 min-w-22">
+			<div className="flex flex-row gap-2 mt-4 items-start">
+				<div>With Virtual, the number of rows will stay the same, only their contents and position are affected.</div>
+
+				<div className={`p-2 rounded-md flex flex-col items-center bg-gray-200 dark:bg-gray-700 min-w-17 sm:min-w-23 text-sm ${ updateDuration > 15 ? 'text-red-600': ''}` }>
 					<ClockIcon className="w-8 h-8"/>
-					<label className="text-center text-sm">Update<br/>
+					<label className="text-center text-sm text-nowrap">Update<br/>
 						{updateDuration.toPrecision(2)} ms
 					</label>
 				</div>

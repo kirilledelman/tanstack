@@ -18,7 +18,7 @@ export default function Header() {
 
 		<span className="flex-1/2"/>
 
-		<Field className="switch-field">
+		<Field className="switch-field flex flex-col sm:flex-row items-center">
 			<Label>{context.theme}</Label>
 			<Switch className="switch group" onChange={context.toggleTheme} checked={context.theme === 'light'}>
 				<span/>

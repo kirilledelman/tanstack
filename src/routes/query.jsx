@@ -98,7 +98,7 @@ function RouteComponent() {
 			</p>
 
 			<h2 className="flex flex-row items-center">
-				Data from Server
+				Server Data
 				<div className="text-sm font-normal flex-1 justify-end self-end items-center gap-2 flex flex-row">
 					<button className="small" onClick={()=>goPage(-1)} disabled={page === 0}>Prev</button>
 					Page {page+1}
